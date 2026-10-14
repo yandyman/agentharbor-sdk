@@ -1,0 +1,63 @@
+{
+  "name": "agentharbor",
+  "version": "0.1.0",
+  "description": "Client for Agent Harbor's pay-per-call x402 API (USDC on Base) with a client-side budget guard, plus Vercel AI SDK tools",
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./ai": {
+      "types": "./ai.d.ts",
+      "default": "./src/ai.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "src",
+    "index.d.ts",
+    "ai.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "peerDependencies": {
+    "@x402/evm": "^2.13.0",
+    "@x402/fetch": "^2.13.0",
+    "ai": ">=5.0.0",
+    "viem": "^2.0.0",
+    "zod": "^3.25.0 || ^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@x402/evm": { "optional": true },
+    "@x402/fetch": { "optional": true },
+    "ai": { "optional": true },
+    "viem": { "optional": true },
+    "zod": { "optional": true }
+  },
+  "keywords": ["x402", "agents", "ai-agents", "usdc", "base", "ai-sdk", "vercel-ai", "company-data", "web-scraping", "seo"],
+  "author": "Agent Harbor LLC",
+  "license": "MIT",
+  "homepage": "https://github.com/yandyman/agentharbor-sdk/tree/main/js#readme",
+  "bugs": {
+    "url": "https://github.com/yandyman/agentharbor-sdk/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yandyman/agentharbor-sdk.git",
+    "directory": "js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
