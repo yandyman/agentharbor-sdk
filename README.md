@@ -166,8 +166,9 @@ cd js && npm test                                    # node:test, no dependencie
 CI ([`.github/workflows/test.yml`](.github/workflows/test.yml)) also runs both packages against the
 real x402 libraries with a throwaway key (local signing only, no funds, no network).
 
-Releases: tag `py-vX.Y.Z` publishes `python/` to PyPI, tag `js-vX.Y.Z` publishes `js/` to npm, both
-through trusted publishing (OIDC, no stored tokens).
+Releases: tag `py-vX.Y.Z` publishes `python/` to PyPI; tag `js-vX.Y.Z` stages `js/` on npm, where a
+maintainer approves it with 2FA (npmjs.com → Staged Packages) before it goes public. Both use trusted
+publishing (OIDC, no stored tokens).
 
 ## License
 

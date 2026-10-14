@@ -35,7 +35,7 @@ export {
 } from "./guard.js";
 export { TOOL_SPECS, PRICES_USD } from "./tools.js";
 
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.1";
 export const DEFAULT_BASE_URL = "https://x402.agentharbor.agency";
 const CLOUDFLARE_TIMEOUTS = new Set([520, 521, 522, 523, 524, 525, 526, 527]);
 
