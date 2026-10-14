@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agentharbor"
+version = "0.1.0"
+description = "Client for Agent Harbor's pay-per-call x402 API (USDC on Base) with a client-side budget guard"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Agent Harbor LLC" }]
+keywords = ["x402", "agents", "ai-agents", "usdc", "base", "langchain", "company-data", "web-scraping", "seo"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Internet :: WWW/HTTP",
+  "Typing :: Typed",
+]
+dependencies = ["httpx>=0.27"]
+
+[project.optional-dependencies]
+# x402[evm]: the EVM signer in the x402 SDK imports eth-abi, eth-utils and web3 as well as eth-account.
+x402 = ["x402[httpx,evm]>=2.13,<3", "eth-account>=0.13"]
+langchain = ["langchain-core>=0.3"]
+test = ["pytest>=8"]
+
+[project.urls]
+Homepage = "https://agentharbor.agency"
+Repository = "https://github.com/yandyman/agentharbor-sdk"
+Issues = "https://github.com/yandyman/agentharbor-sdk/issues"
+"API reference" = "https://x402.agentharbor.agency/llms.txt"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agentharbor"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/agentharbor", "tests", "README.md", "LICENSE", "pyproject.toml"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "tests"]
+testpaths = ["tests"]

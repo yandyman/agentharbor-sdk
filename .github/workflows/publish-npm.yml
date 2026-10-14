@@ -1,0 +1,37 @@
+name: publish-npm
+
+# Push a tag like js-v0.1.0 to publish js/ to npm with trusted publishing (OIDC).
+# No NPM_TOKEN: npm trusts this repository and workflow file (configure the trusted
+# publisher on npmjs.com). Trusted publishing needs npm CLI >= 11.5.1 and Node >= 22.14.
+on:
+  push:
+    tags: ["js-v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    defaults:
+      run:
+        working-directory: js
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: npm CLI new enough for trusted publishing
+        run: |
+          npm install -g npm@^11.5.1
+          npm --version
+      - name: Tag must match the package version
+        run: |
+          version=$(node -p "require('./package.json').version")
+          test "js-v${version}" = "${GITHUB_REF_NAME}" || { echo "tag ${GITHUB_REF_NAME} != js-v${version}"; exit 1; }
+      - run: npm test
+      - run: npm publish --provenance --access public
