@@ -40,10 +40,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: |
+      - name: Install with the x402 and langchain extras
+        run: |
+          set -o pipefail
           python -m pip install --upgrade pip
-          pip install -e ".[test,x402,langchain]"
-          pytest -q -rs
+          pip install -e ".[test,x402,langchain]" 2>&1 | tee ../install.log || {
+            echo "::error title=pip install failed::$(tail -n 25 ../install.log | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')"; exit 1; }
+          pip list 2>/dev/null | grep -iE "^(x402|eth-|web3|langchain-core|httpx|pydantic) "
+      - name: Tests with the real x402 SDK
+        run: |
+          set -o pipefail
+          pytest -q -rs 2>&1 | tee ../pytest.log || {
+            echo "::error title=pytest failed::$(tail -n 40 ../pytest.log | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')"; exit 1; }
       - name: Build sdist and wheel
         run: |
           pip install build twine
