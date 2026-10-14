@@ -292,6 +292,6 @@ def test_package_imports_without_the_x402_extra():
 
     src = os.path.join(os.path.dirname(__file__), "..", "src")
     code = "import sys, agentharbor, agentharbor.client, agentharbor.payment; assert 'x402' not in sys.modules, 'x402 imported eagerly'"
-    env = {**os.environ, "PYTHONPATH": os.path.abspath(src)}
+    env = {**os.environ, "PYTHONPATH": os.pathsep.join(filter(None, [os.path.abspath(src), os.environ.get("PYTHONPATH")]))}
     done = subprocess.run([sys.executable, "-c", code], env=env, capture_output=True, text=True)
     assert done.returncode == 0, done.stderr
