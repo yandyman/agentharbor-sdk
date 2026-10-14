@@ -152,7 +152,12 @@ route answers 404 (`NotCharged`). `/catalog` lists what is live.
 
 ## Where else the API is listed
 
-- [PayAPI Market](https://payapi.market/api/agent-harbor-business-website-data) (agents can search it via https://payapi.market/mcp)
+- PayAPI Market, each route settlement-verified (agents can search PayAPI via https://payapi.market/mcp):
+  [`/scrape`](https://payapi.market/api/agent-harbor-business-website-data),
+  [`/company`](https://payapi.market/api/agent-harbor-company-card),
+  [`/enrich`](https://payapi.market/api/agent-harbor-company-enrichment),
+  [`/audit`](https://payapi.market/api/agent-harbor-website-tracking-and-consent-audit),
+  [`/ai-crawlers`](https://payapi.market/api/agent-harbor-ai-crawler-access-check)
 - [MPPScan](https://www.mppscan.com/server/c6a6ae85cf378f4dd5664ffaa4ba9bacc205eedbce16d092678b9be4552131e3) (MPP routes)
 - The gateway's own discovery files: [`/llms.txt`](https://x402.agentharbor.agency/llms.txt), [`/SKILL.md`](https://x402.agentharbor.agency/SKILL.md), [`/openapi.json`](https://x402.agentharbor.agency/openapi.json)
 
