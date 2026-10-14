@@ -1,6 +1,6 @@
 {
   "name": "agentharbor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Client for Agent Harbor's pay-per-call x402 API (USDC on Base) with a client-side budget guard, plus Vercel AI SDK tools",
   "type": "module",
   "main": "./src/index.js",

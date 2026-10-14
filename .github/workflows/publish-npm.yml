@@ -1,8 +1,11 @@
 name: publish-npm
 
-# Push a tag like js-v0.1.0 to publish js/ to npm with trusted publishing (OIDC).
-# No NPM_TOKEN: npm trusts this repository and workflow file (configure the trusted
-# publisher on npmjs.com). Trusted publishing needs npm CLI >= 11.5.1 and Node >= 22.14.
+# Push a tag like js-v0.1.1 to STAGE js/ on npm with trusted publishing (OIDC).
+# No NPM_TOKEN: npm trusts this repository and workflow file (trusted publisher on
+# npmjs.com, allowed action "npm stage publish" only). The release goes public only after
+# a maintainer approves it with 2FA: npmjs.com -> Staged Packages, or `npm stage approve <id>`.
+# Staged publishing needs npm CLI >= 11.15.0 and Node >= 22.14; provenance comes from
+# publishConfig.provenance in package.json.
 on:
   push:
     tags: ["js-v*"]
@@ -25,13 +28,14 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
-      - name: npm CLI new enough for trusted publishing
+      - name: npm CLI new enough for staged trusted publishing
         run: |
-          npm install -g npm@^11.5.1
+          npm install -g npm@^11.15.0
           npm --version
       - name: Tag must match the package version
         run: |
           version=$(node -p "require('./package.json').version")
           test "js-v${version}" = "${GITHUB_REF_NAME}" || { echo "tag ${GITHUB_REF_NAME} != js-v${version}"; exit 1; }
+          grep -q "export const VERSION = \"${version}\";" src/index.js || { echo "src/index.js VERSION != ${version}"; exit 1; }
       - run: npm test
-      - run: npm publish --provenance --access public
+      - run: npm stage publish --access public
