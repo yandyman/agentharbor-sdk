@@ -286,4 +286,12 @@ def test_private_key_and_account_are_exclusive():
 
 
 def test_package_imports_without_the_x402_extra():
-    assert "x402" not in sys.modules
+    # A fresh interpreter: other test modules (and pytest collection) may already have imported x402.
+    import os
+    import subprocess
+
+    src = os.path.join(os.path.dirname(__file__), "..", "src")
+    code = "import sys, agentharbor, agentharbor.client, agentharbor.payment; assert 'x402' not in sys.modules, 'x402 imported eagerly'"
+    env = {**os.environ, "PYTHONPATH": os.path.abspath(src)}
+    done = subprocess.run([sys.executable, "-c", code], env=env, capture_output=True, text=True)
+    assert done.returncode == 0, done.stderr
