@@ -150,6 +150,12 @@ includes `"charged": false`, and the payment authorization is never settled.
 `/audit` and `/ai-crawlers` are served only while the audit service is enabled; when it is off the
 route answers 404 (`NotCharged`). `/catalog` lists what is live.
 
+## Where else the API is listed
+
+- [PayAPI Market](https://payapi.market/api/agent-harbor-business-website-data) (agents can search it via https://payapi.market/mcp)
+- [MPPScan](https://www.mppscan.com/server/c6a6ae85cf378f4dd5664ffaa4ba9bacc205eedbce16d092678b9be4552131e3) (MPP routes)
+- The gateway's own discovery files: [`/llms.txt`](https://x402.agentharbor.agency/llms.txt), [`/SKILL.md`](https://x402.agentharbor.agency/SKILL.md), [`/openapi.json`](https://x402.agentharbor.agency/openapi.json)
+
 ## Development
 
 ```bash
