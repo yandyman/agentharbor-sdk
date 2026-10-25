@@ -7,6 +7,7 @@ import asyncio
 import base64
 import json
 
+import httpx
 import pytest
 
 pytest.importorskip("x402")
@@ -43,3 +44,15 @@ def test_real_sdk_never_signs_a_refused_quote(req, err):
     with pytest.raises(err):
         asyncio.run(_client(gw).scrape("example.com"))
     assert not any("payment-signature" in q.headers for q in gw.requests)
+
+
+def test_real_sdk_pays_a_public_data_route_with_its_query():
+    def echo(request):
+        return httpx.Response(200, json={"params": dict(request.url.params)})
+    gw = FakeGateway(quote=payment_required(requirement("3000")), paid=echo)
+    r = asyncio.run(_client(gw).package_check("pypi", "requests", "2.25.0"))
+    assert r["params"] == {"ecosystem": "pypi", "name": "requests", "version": "2.25.0"}
+    paid = [q for q in gw.requests if "payment-signature" in q.headers]
+    assert len(paid) == 1 and paid[0].url.params["name"] == "requests"
+    auth = json.loads(base64.b64decode(paid[0].headers["payment-signature"]))["payload"]["authorization"]
+    assert int(auth["value"]) == 3000
