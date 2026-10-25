@@ -97,6 +97,13 @@ One `StructuredTool` per route (`agentharbor_company`, `agentharbor_scrape`,
 states its price. Tools return the JSON body as a string; failures become tool errors that say
 whether anything was charged.
 
+## Support this project
+
+This package is free and MIT licensed. Sponsoring it through
+[GitHub Sponsors](https://github.com/sponsors/yandyman) pays for maintenance: keeping it current with
+the x402 libraries, fixing bugs, and keeping it free and documented. Sponsorship does not change what
+the API costs or how it behaves.
+
 ## Links
 
 [API docs (llms.txt)](https://x402.agentharbor.agency/llms.txt) ·

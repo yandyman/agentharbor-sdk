@@ -83,6 +83,13 @@ entries keyed `agentharbor_company`, `agentharbor_scrape`, `agentharbor_ai_crawl
 `agentharbor_enrich`, `agentharbor_audit`. Descriptions state the price. A failed or refused call
 returns `{ error, charged, message }` to the model instead of throwing.
 
+## Support this project
+
+This package is free and MIT licensed. Sponsoring it through
+[GitHub Sponsors](https://github.com/sponsors/yandyman) pays for maintenance: keeping it current with
+the x402 libraries, fixing bugs, and keeping it free and documented. Sponsorship does not change what
+the API costs or how it behaves.
+
 ## Links
 
 [API docs (llms.txt)](https://x402.agentharbor.agency/llms.txt) ·
