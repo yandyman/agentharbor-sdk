@@ -51,6 +51,10 @@
   "bugs": {
     "url": "https://github.com/yandyman/agentharbor-sdk/issues"
   },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/yandyman"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yandyman/agentharbor-sdk.git",
