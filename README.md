@@ -1,3 +1,12 @@
+<p align="center">
+  <a href="https://agentharbor.agency">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://agentharbor.agency/img/brand/agent-harbor-logo-horizontal-white.svg">
+      <img src="https://agentharbor.agency/img/brand/agent-harbor-logo-horizontal.svg" alt="Agent Harbor" width="280">
+    </picture>
+  </a>
+</p>
+
 # Agent Harbor SDK
 
 Client libraries for [Agent Harbor](https://agentharbor.agency)'s pay-per-call business-website API at
