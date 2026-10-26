@@ -14,7 +14,11 @@ class AgentHarborError(Exception):
     charged: bool | None = False
 
 
-class InvalidDomain(AgentHarborError, ValueError):
+class InvalidInput(AgentHarborError, ValueError):
+    """An argument fails the route's published input rules. Raised before any request is made."""
+
+
+class InvalidDomain(InvalidInput):
     """The domain is not a bare public hostname. Raised before any request is made."""
 
 

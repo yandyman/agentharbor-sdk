@@ -9,7 +9,8 @@ from agentharbor import PRICES_USD, TOOL_SPECS, AgentHarbor, AgentHarborSync
 
 from helpers import ACCOUNT, FakeGateway, fake_payer
 
-GATEWAY_PRICES = {"/scrape": "0.01", "/enrich": "0.05", "/audit": "0.05", "/company": "0.005", "/ai-crawlers": "0.01"}
+GATEWAY_PRICES = {"/scrape": "0.01", "/enrich": "0.05", "/audit": "0.05", "/company": "0.005", "/ai-crawlers": "0.01",
+                  "/domain-verify": "0.005"}
 
 
 def test_prices_match_the_gateway():
@@ -18,7 +19,7 @@ def test_prices_match_the_gateway():
 
 def test_descriptions_are_honest_about_price_and_charging():
     names = [s.name for s in TOOL_SPECS]
-    assert len(set(names)) == len(names) == 5
+    assert len(set(names)) == len(names) == 6
     for s in TOOL_SPECS:
         assert f"${s.price_usd}." in s.description, s.name
         assert "not charged" in s.description and "USDC on Base" in s.description

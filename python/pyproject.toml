@@ -4,14 +4,15 @@ build-backend = "hatchling.build"
 
 [project]
 name = "agentharbor"
-version = "0.1.0"
+version = "0.2.0"
 description = "Client for Agent Harbor's pay-per-call x402 API (USDC on Base) with a client-side budget guard"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{ name = "Agent Harbor LLC" }]
-keywords = ["x402", "agents", "ai-agents", "usdc", "base", "langchain", "company-data", "web-scraping", "seo"]
+keywords = ["x402", "agents", "ai-agents", "usdc", "base", "langchain", "company-data", "web-scraping", "seo",
+            "sec-edgar", "product-recalls", "osv", "domain-verification", "pdf-to-markdown"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
@@ -38,6 +39,7 @@ Homepage = "https://agentharbor.agency"
 Repository = "https://github.com/yandyman/agentharbor-sdk"
 Issues = "https://github.com/yandyman/agentharbor-sdk/issues"
 "API reference" = "https://x402.agentharbor.agency/llms.txt"
+Changelog = "https://github.com/yandyman/agentharbor-sdk/blob/main/python/README.md#changelog"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/agentharbor"]
