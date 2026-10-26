@@ -48,6 +48,12 @@ TOOL_SPECS: tuple[ToolSpec, ...] = (
         "whether tracking loads before a consent choice, structured data (schema.org), AI-crawler access and SEO "
         "basics, as a ranked fix list with evidence. Visitor-dependent findings are marked as leads to verify. "
         "Costs $0.05. " + _PAID),
+    ToolSpec(
+        "agentharbor_domain_verify", "domain_verify", "/domain-verify", "0.005",
+        "Check whether a domain is a real, live and established business domain: DNS (A, MX, NS, SPF, DMARC, "
+        "DNSSEC), registration age and status from RDAP (never registrant contacts), the TLS certificate and the "
+        "website, with risk flags such as newly registered, no MX or invalid TLS. 'Does not exist' is an answer. "
+        "Costs $0.005. " + _PAID + " Not charged if the lookups fail."),
 )
 
 PRICES_USD = {spec.path: spec.price_usd for spec in TOOL_SPECS}
