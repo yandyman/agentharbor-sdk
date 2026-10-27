@@ -194,6 +194,14 @@ Releases: tag `py-vX.Y.Z` publishes `python/` to PyPI; tag `js-vX.Y.Z` stages `j
 maintainer approves it with 2FA (npmjs.com → Staged Packages) before it goes public. Both use trusted
 publishing (OIDC, no stored tokens).
 
+## Support this project
+
+The SDK and its docs are MIT licensed; the hosted SKILL.md is free to use. If they save you time, you
+can sponsor the work through [GitHub Sponsors](https://github.com/sponsors/yandyman). Sponsorship pays for
+maintenance: keeping both packages current with the x402 libraries, fixing bugs, keeping CI and the
+documentation accurate, and keeping the SDK free to use. It does not buy priority support or change
+what the API costs or how it behaves; every user gets the same packages.
+
 ## License
 
 MIT, Agent Harbor LLC.

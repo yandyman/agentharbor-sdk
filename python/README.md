@@ -115,6 +115,13 @@ each with a description that states its price. The other public-data routes are 
 for now. Tools return the JSON body as a string; failures become tool errors that say
 whether anything was charged.
 
+## Support this project
+
+This package is free and MIT licensed. Sponsoring it through
+[GitHub Sponsors](https://github.com/sponsors/yandyman) pays for maintenance: keeping it current with
+the x402 libraries, fixing bugs, and keeping it free and documented. Sponsorship does not change what
+the API costs or how it behaves.
+
 ## Changelog
 
 - **0.2.0**: methods for the public-data routes: `sec_company`, `recalls`, `package_check`,

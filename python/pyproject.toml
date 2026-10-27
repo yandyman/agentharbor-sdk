@@ -38,6 +38,7 @@ test = ["pytest>=8"]
 Homepage = "https://agentharbor.agency"
 Repository = "https://github.com/yandyman/agentharbor-sdk"
 Issues = "https://github.com/yandyman/agentharbor-sdk/issues"
+Funding = "https://github.com/sponsors/yandyman"
 "API reference" = "https://x402.agentharbor.agency/llms.txt"
 Changelog = "https://github.com/yandyman/agentharbor-sdk/blob/main/python/README.md#changelog"
 
