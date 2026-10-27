@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="https://agentharbor.agency"><img src="https://agentharbor.agency/img/brand/agent-harbor-logo-horizontal.svg" alt="Agent Harbor" width="240"></a>
+</p>
+
 # agentharbor (JavaScript)
 
 Client for [Agent Harbor](https://agentharbor.agency)'s pay-per-call business-website API at

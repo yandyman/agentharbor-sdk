@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="https://agentharbor.agency"><img src="https://agentharbor.agency/img/brand/agent-harbor-logo-horizontal.svg" alt="Agent Harbor" width="240"></a>
+</p>
+
 # agentharbor (Python)
 
 Client for [Agent Harbor](https://agentharbor.agency)'s pay-per-call business-website API at
@@ -39,7 +43,19 @@ asyncio.run(main())
 | `ai_crawlers(domain)` | `/ai-crawlers` | $0.01 |
 | `enrich(domain)` | `/enrich` | $0.05 |
 | `audit(domain)` | `/audit` | $0.05 |
+| `domain_verify(domain)` | `/domain-verify` | $0.005 |
+| `sec_company(ticker)` or `sec_company(cik=...)`, `filings=`, `forms=` | `/sec-company` | $0.01 |
+| `recalls(category, query, limit=)`; vehicles: `recalls("vehicle", make=, model=, year=)` | `/recalls` | $0.005 |
+| `package_check(ecosystem, name, version=None)` | `/package-check` | $0.003 |
+| `pdf_extract(url, pages=None)` | `/pdf-extract` | $0.01 |
 | `catalog()` | `/catalog` | free |
+
+```python
+filing = await client.sec_company("AAPL", filings=5)                 # $0.01
+vulns = await client.package_check("pypi", "requests", "2.25.0")     # $0.003
+hits = await client.recalls("consumer", "stroller", limit=3)          # $0.005
+doc = await client.pdf_extract("https://www.irs.gov/pub/irs-pdf/fw9.pdf", pages="1-2")   # $0.01
+```
 
 Paid methods return a `Result`: the JSON body as a plain `dict`, plus `.payment` (decoded
 PAYMENT-RESPONSE: transaction hash, network, payer), `.quote` (the vetted price) and `.request_id`.
@@ -73,7 +89,8 @@ registered as an x402 client policy.
 
 All errors subclass `AgentHarborError` and carry `.charged` (`False`, or `None` when unknown).
 
-- `InvalidDomain`: not a bare public hostname (checked client-side with the gateway's rules).
+- `InvalidInput`: an argument breaks the route's published input rules (checked client-side, before
+  any request). `InvalidDomain` (not a bare public hostname) is a subclass.
 - `PaymentRefused` (`PriceTooHigh`, `UnexpectedPayee`, `UnsupportedNetwork`,
   `MalformedPaymentRequired`): the quote failed the guard; nothing signed.
 - `WalletRequired`: no wallet configured; `.quote` holds the price.
@@ -92,9 +109,10 @@ from agentharbor.langchain import get_tools
 tools = get_tools(AgentHarbor(private_key=..., max_price_usd=0.01), include=["company", "ai_crawlers"])
 ```
 
-One `StructuredTool` per route (`agentharbor_company`, `agentharbor_scrape`,
-`agentharbor_ai_crawlers`, `agentharbor_enrich`, `agentharbor_audit`), each with a description that
-states its price. Tools return the JSON body as a string; failures become tool errors that say
+One `StructuredTool` per domain route (`agentharbor_company`, `agentharbor_scrape`,
+`agentharbor_ai_crawlers`, `agentharbor_enrich`, `agentharbor_audit`, `agentharbor_domain_verify`),
+each with a description that states its price. The other public-data routes are client methods only
+for now. Tools return the JSON body as a string; failures become tool errors that say
 whether anything was charged.
 
 ## Support this project
@@ -103,6 +121,14 @@ This package is free and MIT licensed. Sponsoring it through
 [GitHub Sponsors](https://github.com/sponsors/yandyman) pays for maintenance: keeping it current with
 the x402 libraries, fixing bugs, and keeping it free and documented. Sponsorship does not change what
 the API costs or how it behaves.
+
+## Changelog
+
+- **0.2.0**: methods for the public-data routes: `sec_company`, `recalls`, `package_check`,
+  `domain_verify`, `pdf_extract` (inputs checked client-side against the gateway's published rules;
+  new `InvalidInput` error, parent of `InvalidDomain`); LangChain tool `agentharbor_domain_verify`.
+- **0.1.0**: first release: `company`, `scrape`, `ai_crawlers`, `enrich`, `audit`, `catalog`, budget
+  guard, LangChain tools.
 
 ## Links
 

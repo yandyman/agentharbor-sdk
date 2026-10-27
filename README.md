@@ -1,3 +1,12 @@
+<p align="center">
+  <a href="https://agentharbor.agency">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://agentharbor.agency/img/brand/agent-harbor-logo-horizontal-white.svg">
+      <img src="https://agentharbor.agency/img/brand/agent-harbor-logo-horizontal.svg" alt="Agent Harbor" width="280">
+    </picture>
+  </a>
+</p>
+
 # Agent Harbor SDK
 
 Client libraries for [Agent Harbor](https://agentharbor.agency)'s pay-per-call business-website API at
@@ -14,15 +23,25 @@ Both packages put a **budget guard** in front of every payment and never pay for
 
 ## What you can call
 
-Every paid route takes one input, a bare domain (`example.com`), and answers JSON.
+The website routes take one input, a bare domain (`example.com`), and answer JSON.
 
 | Route | Price per call | Returns | Typical ceiling |
 |---|---|---|---|
 | `GET /company?domain=` | $0.005 | Business name and where it came from, a generic role contact address (info@, sales@ ...) only if the site publishes one, up to 10 technology platform names | 45 s |
 | `GET /scrape?domain=` | $0.01 | Business name with source, published contact surface, technology platforms with the evidence each was detected from; unsupported claims struck | 45 s |
-| `GET /ai-crawlers?domain=` | $0.01 | Which AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended ...) robots.txt allows, Googlebot, sitemaps, llms.txt, page-level noindex/nosnippet, with fixes | 35 s |
+| `GET /ai-crawlers?domain=` | $0.01 | Which AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended ...) robots.txt allows, Googlebot, sitemaps, llms.txt, page-level noindex/nosnippet, with fixes | 40 s |
 | `GET /enrich?domain=` | $0.05 | Validated company profile: firmographics and a tech-stack summary, written by a model on Agent Harbor's own hardware and checked against the scraped page | 120 s |
 | `GET /audit?domain=` | $0.05 | Home-page audit in a real browser: tags, consent (does tracking fire before a choice), structured data, AI-crawler access, SEO basics, as a ranked fix list | 75 s |
+
+Public-data routes (Python 0.2.0 methods; in JS use `@x402/fetch` directly for now):
+
+| Route | Price per call | Returns |
+|---|---|---|
+| `GET /domain-verify?domain=` | $0.005 | DNS, RDAP registration, TLS and website checks with risk flags |
+| `GET /sec-company?ticker=` (or `cik=`) | $0.01 | SEC EDGAR profile, latest annual XBRL financials, recent filings |
+| `GET /recalls?category=&query=` | $0.005 | CPSC, NHTSA and FDA recalls, newest first |
+| `GET /package-check?ecosystem=&name=&version=` | $0.003 | OSV vulnerabilities, license, latest version, deprecation |
+| `GET /pdf-extract?url=&pages=` | $0.01 | A public PDF as markdown with tables, up to 30 pages |
 
 `/scrape`, `/enrich` and `/company` also return a free `content_safety` field
 (`{injection_flags: [...], strings_scanned}`) listing prompt-injection patterns found in the returned
